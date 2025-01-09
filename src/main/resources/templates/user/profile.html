@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+    <h2>사용자 프로필</h2>
+    <p>아이디: <span th:text="${user.userId}"></span></p>
+    <p>이름: <span th:text="${user.name}"></span></p>
+    <p>생년월일: <span th:text="${user.birth}"></span></p>
+    <p>성별: <span th:text="${user.gender}"></span></p>
+    <p>주소: <span th:text="${user.address}"></span></p>
+</body>
+</html>
