@@ -1,8 +1,12 @@
 package com.acon.weatherapp.controller;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,8 +34,15 @@ public class UserController {
 	
 	// 회원가입 처리
 	@PostMapping("/register")
-	public String userRegister(User user, Model model){
+	public String userRegister(@Valid User user, Errors errors, Model model){
 		try{
+			if(errors.hasErrors()) {
+				for(FieldError fieldError :  errors.getFieldErrors()) {
+					model.addAttribute( fieldError.getField(), fieldError.getDefaultMessage());
+				}
+				model.addAttribute("user" , user);
+	            return "user/register";
+			}
 			userService.registerUser(user);
 		}catch (IllegalArgumentException | NoSuchElementException e){
 			model.addAttribute("error", e.getMessage());
