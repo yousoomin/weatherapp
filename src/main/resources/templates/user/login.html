@@ -24,7 +24,10 @@
 	</th:block>
 	<th:block th:if="${session.userId != null}">
 		<p th:text="${session.userId + ' 님 환영합니다.'}"></p>
-		<a href="/user/logout">로그아웃</a>
+		
+		<a href="/user/profile">my page</a>
+		<a href="/user/logout">로그아웃</a><br><br>
+		<a href="/">메인으로</a>
 	</th:block>
 
 </body>

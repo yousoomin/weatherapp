@@ -31,7 +31,7 @@ public class LoginController {
 	
 	// 로그인 처리
 	@PostMapping("/login")
-	public String login(@RequestParam String userId, @RequestParam String password, Model model , HttpSession session) {
+	public String login(@RequestParam String userId, @RequestParam String password, Model model, HttpSession session) {
 		// 로그인 성공 시 홈으로 리다이렉트
 		try {
 			User user = userService.login(userId, password);
@@ -46,6 +46,13 @@ public class LoginController {
 			model.addAttribute("error",e.getMessage());
 			return "user/login";
 		}
-
+	}
+	
+	// 로그아웃 처리
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		
+		return "redirect:/user/login";
 	}
 }
