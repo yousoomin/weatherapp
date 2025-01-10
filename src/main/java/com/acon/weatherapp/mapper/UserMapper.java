@@ -29,7 +29,7 @@ public interface UserMapper {
    void update(User user);
    
    // 삭제
-   @Delete("DELETE users WHERE userid = #{userId}")
-   void delete(String userid);
+   @Delete("DELETE FROM users WHERE userid = #{userId}")
+   void delete(String userId);
 
 }
