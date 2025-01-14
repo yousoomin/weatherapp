@@ -76,7 +76,7 @@ public class UserService {
             user.setPhone(userDto.getPhone());
             userMapper.update(user);
     }
-    // 회원삭제
+    // 회원 탈퇴
     public void deleteUser(String password , HttpSession session) {
         User user = userMapper.findByUserId(session.getAttribute("userId").toString());
         if(user.getPassword().equals(password)) {
