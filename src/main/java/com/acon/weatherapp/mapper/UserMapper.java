@@ -12,8 +12,8 @@ public interface UserMapper {
 
 
 //회원가입
-  @Insert("INSERT INTO users (userid, name, birth, password, gender, address, phone, role) " +
-           "VALUES (#{userId}, #{name}, #{birth}, #{password}, #{gender}, #{address}, #{phone}, #{role})")
+  @Insert("INSERT INTO users (userid, name, birth, password, gender, address, phone, role, email) " +
+           "VALUES (#{userId}, #{name}, #{birth}, #{password}, #{gender}, #{address}, #{phone}, #{role}, #{email})")
    void save(User user);
    
    //id로 해당 유저 있는지 찾기

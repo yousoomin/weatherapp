@@ -3,19 +3,18 @@ package com.acon.weatherapp.controller;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.acon.weatherapp.model.User;
 import com.acon.weatherapp.service.UserService;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -31,10 +30,25 @@ public class UserController {
 	public String userRegisterForm() {
 		return "user/register";
 	}
-	
+
+	@PostMapping("/validateUserId")
+	@ResponseBody
+	public ResponseEntity<Map<String,String>> validateUserId(@RequestBody Map<String,String> req){
+		String userId = req.get("userId");
+		Map<String, String> response = new HashMap<>();
+		User user = userService.getUser(userId);
+		if(user != null){
+			response.put("status" , "unavailable");
+		}else {
+			response.put("status" , "available");
+		}
+		return ResponseEntity.ok(response);
+	}
+
 	// 회원가입 처리
 	@PostMapping("/register")
 	public String userRegister(@Valid User user, Errors errors, Model model){
+
 		try{
 			if(errors.hasErrors()) {
 				for(FieldError fieldError :  errors.getFieldErrors()) {

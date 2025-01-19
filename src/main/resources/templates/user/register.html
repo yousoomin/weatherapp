@@ -4,39 +4,72 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link rel="stylesheet" href="/css/register.css">
 <body>
-	<div>
-		<h2>회원가입</h2>
-		<form action="/user/register" method="post">
-			<input type="text" id="userId" name="userId" placeholder="아이디" th:value="${user != null ? user.userId : ''}">
-			<span th:if="${userId}" th:text="${userId}" style="color: red"></span><br>
-			
-			<input type="text" id="name" name="name" placeholder="이름" th:value="${user != null ? user.name : ''}">
-			<span th:if="${name}" th:text="${name}" style="color: red"></span><br>
-			
-			<input type="date" id="birth" name="birth" placeholder="생년월일" th:value="${user != null ? user.birth : ''}">
-			<span th:if="${birth}" th:text="${birth}" style="color: red"></span><br>
-			
-			<input type="password" birth="password" name="password" placeholder="비밀번호" th:value="${user != null ? user.password : ''}">
-			<span th:if="${password}" th:text="${password}" style="color: red"></span><br>
-			
-			<input type="password" birth="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인" th:value="${user != null ? user.confirmPassword : ''}">
-			<span th:if="${confirmPassword}" th:text="${confirmPassword}" style="color: red"></span><br>
-			
-			<label>성별:</label>
-			<input type="radio" id="gender" name="gender" value="male"  required>남 
-			<input type="radio" id="gender" name="gender" value="female"  required>여
-			<span th:if="${gender}" th:text="${gender}" style="color: red"></span><br>
-			
-			<input type="text" id="address" name="address" placeholder="주소" th:value="${user != null ? user.address : ''}">
-			<span th:if="${address}" th:text="${address}" style="color: red"></span><br>
-			
-			<input type="tel" id="phone" name="phone" placeholder="전화번호" th:value="${user != null ? user.phone : ''}">
-			<span th:if="${phone}" th:text="${phone}" style="color: red"></span><br>
-			
-			<button type="submit">회원가입</button>
-		</form>
-		<div th:if="${error}" class="message" th:text="${error}" style="color:red;"></div>
+	<div class="register-container" >
+			<h2>회원가입</h2>
+			<form action="/user/register" method="post">
+				<div>
+					<input type="text" id="userId" name="userId" placeholder="아이디를 입력해주세요" th:value="${user != null ? user.userId : ''}">
+					<button type="button" id="valiDate" class="inline-button">중복 확인</button>
+					<span th:if="${userId}" th:text="${userId}" style="color: red"></span><br>
+				</div>
+
+				<div>
+					<input type="password" id="password" name="password" placeholder="비밀번호" th:value="${user != null ? user.password : ''}">
+					<span th:if="${password}" th:text="${password}" style="color: red"></span><br>
+				</div>
+
+				<div>
+					<input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인" th:value="${user != null ? user.confirmPassword : ''}">
+					<span th:if="${confirmPassword}" th:text="${confirmPassword}" style="color: red"></span><br>
+				</div>
+
+				<div>
+					<input type="text" id="email" name="email" placeholder="(선택) 이메일주소 (비밀번호 찾기 등 본인 확인용) " th:value="${user != null ? user.email : ''}">
+					<span th:if="${email}" th:text="${email}" style="color: red"></span><br>
+				</div>
+
+				<div>
+					<input type="text" id="name" name="name" placeholder="이름" th:value="${user != null ? user.name : ''}">
+					<span th:if="${name}" th:text="${name}" style="color: red"></span><br>
+				</div>
+
+				<div>
+					<input type="text" id="birth" name="birth" maxlength="10"  placeholder="생년월일 8자리" th:value="${user != null ? user.birth : ''}">
+					<span th:if="${birth}" th:text="${birth}" style="color: red"></span><br>
+				</div>
+
+				<div>
+					<ul class="gender-options" >
+						<li class="gender-option">
+							<input type="radio" id="gender1" name="gender" value="male">
+							<label for="gender1">남자</label>
+						</li>
+						<li class="gender-option">
+							<input type="radio" id="gender2" name="gender" value="female" >
+							<label for="gender2">여자</label>
+						</li>
+					</ul>
+					<span th:if="${gender}" th:text="${gender}" style="color: red"></span>
+				</div>
+
+				<div>
+					<input type="text" id="address" name="address" placeholder="주소" th:value="${user != null ? user.address : ''}">
+					<button class="inline-button">주소 찾기</button>
+					<span th:if="${address}" th:text="${address}" style="color: red"></span><br>
+				</div>
+
+
+				<div>
+					<input type="tel" id="phone" name="phone" placeholder="전화번호" th:value="${user != null ? user.phone : ''}">
+					<button class="inline-button">인증 요청</button>
+					<span th:if="${phone}" th:text="${phone}" style="color: red"></span><br>
+				</div>
+				<button type="submit">회원가입</button>
+			</form>
+			<div th:if="${error}" class="message" th:text="${error}" style="color:red;"></div>
 	</div>
+<script src="/js/register.js"> </script>
 </body>
 </html>
