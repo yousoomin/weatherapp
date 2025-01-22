@@ -17,10 +17,10 @@
 			<input type="date" id="birth" name="birth" placeholder="생년월일" th:value="${user != null ? user.birth : ''}">
 			<span th:if="${birth}" th:text="${birth}" style="color: red"></span><br>
 			
-			<input type="password" birth="password" name="password" placeholder="비밀번호" th:value="${user != null ? user.password : ''}">
+			<input type="password" id="password" name="password" placeholder="비밀번호" th:value="${user != null ? user.password : ''}">
 			<span th:if="${password}" th:text="${password}" style="color: red"></span><br>
 			
-			<input type="password" birth="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인" th:value="${user != null ? user.confirmPassword : ''}">
+			<input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인" th:value="${user != null ? user.confirmPassword : ''}">
 			<span th:if="${confirmPassword}" th:text="${confirmPassword}" style="color: red"></span><br>
 			
 			<label>성별:</label>
