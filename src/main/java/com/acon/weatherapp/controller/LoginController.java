@@ -55,4 +55,36 @@ public class LoginController {
 		
 		return "redirect:/user/login";
 	}
+	
+	// 아이디 찾기 페이지 보여주기
+	@GetMapping("/find-id")
+	public String userFindIdForm() {
+		return "user/find-id";
+	}
+	
+	// 아이디 찾기
+	
+	// 비밀번호 찾기 페이지 보여주기
+	@GetMapping("/find-password")
+	public String userFindPasswordForm() {
+		return "/user/find-password";
+	}
+	
+	// 비밀번호 찾기 처리
+	@PostMapping("/find-password")
+	public String userFindPassword(@RequestParam String userId, Model model) {
+		// 비밀번호 재설정 로직 실행
+		try {
+			userService.findPasswordUser(userId);
+			model.addAttribute("message", "비밀번호 재설정 SMS가 발송되었습니다.");
+		}
+		catch(IllegalArgumentException | NoSuchElementException e) {
+			model.addAttribute("error", "입력하신 아이디를 찾을 수 없습니다.");
+		}
+		catch(Exception e) {
+			model.addAttribute("error","다시 시도해주세요.");
+		}
+		return "/user/find-password";
+	}
 }
+

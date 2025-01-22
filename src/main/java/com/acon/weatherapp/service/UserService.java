@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -83,11 +84,36 @@ public class UserService {
             userMapper.delete(user.getUserId());
         }
     }
+    // 아이디 찾기
+ 
+    // 비밀번호 찾기
+    public void findPasswordUser(String userId) {
+    	User user = userMapper.findByUserId(userId);
+    	
+    	if(user == null) {
+            throw  new NoSuchElementException("입력한 아이디에 해당하는 사용자가 존재하지 않습니다.");
+    	}
+    	
+    	// 임시 비밀번호 생성
+    	 String temporaryPassword = generateTemporaryPassword();
+    	 
+    	 user.setPassword(temporaryPassword);
+    	 userMapper.update(user);
+    	 
+    	 String message = "임시 비밀번호는: " + temporaryPassword + " 입니다. 로그인 후 비밀번호를 변경해주세요.";
+         SmsService.sendSMS(user.getPhone(), message);
+    	 
+    }
+    // 임시 비밀번호 생성
+    private String generateTemporaryPassword() {
+		// UUID로 고유한 문자열을 생성한 후, 그 중 일부를 잘라서 임시 비밀번호로 사용
+    	// 길이가 8인 임시 비밀번호 생성
+		return UUID.randomUUID().toString().substring(0, 8);
+	}
 
-    // 모든 회원 조회
+	// 모든 회원 조회
     public List<User> getAllUsers() {
         return userMapper.findAll();
     }
-
     
 }
