@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>login</title>
+
 </head>
 <body>
 	<th:block th:if="${session.userId == null}">
@@ -17,6 +18,14 @@
 			<button type="submit">로그인</button>
 		</form>
 		<p>아직 계정이 없으신가요? <a href="/user/register">회원가입</a></p>
+		
+		<!-- 아이디 / 비밀번호 찾기 -->
+		<p>
+			<a href= "/user/find-id">아이디 찾기</a>
+			<a href= "/user/find-password">비밀번호 찾기</a><br>
+			<a href= "/">메인으로</a>
+		</p>
+
 
 		<div th:if="${error}" style="color:red;">
 			<p th:text="${error}"></p>
