@@ -160,5 +160,11 @@ public class UserController {
 			return "user/profile";
 		}
 	}
+	
+	//주소검색 팝업연결
+	@GetMapping("/addrFind")
+	public String addrFind() {
+		return "user/address";
+	}
 }
 
