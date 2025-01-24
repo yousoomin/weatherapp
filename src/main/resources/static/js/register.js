@@ -30,7 +30,7 @@ const validationRules = {
     },
     phone: {
         regex: /^01[016789]-\d{3,4}-\d{4}$/, // 전화번호
-        errorMessage: "전화번호 : 전화번호는 필수 입력 항목입니다. "
+        errorMessage: "휴대폰 : 휴대폰 번호를 다시 확인해주세요. "
     },
     address : {
         regex : /^[가-힣0-9\s\-]+$/,
@@ -46,6 +46,14 @@ document.querySelector('#birth').addEventListener('input', function(event) {
     if (value.length === 8) {
         // 8자리 입력을 받으면 "yyyyMMdd"에서 "yyyy.MM.dd" 형식으로 변환
         let formatted = value.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+        event.target.value = formatted;
+    }
+});
+document.querySelector('#phone').addEventListener('input', function(event) {
+    let value = event.target.value;
+    if (value.length === 11) {
+        // 11자리 입력을 받으면 "000-0000-0000"  변환
+        let formatted = value.replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3');
         event.target.value = formatted;
     }
 });
