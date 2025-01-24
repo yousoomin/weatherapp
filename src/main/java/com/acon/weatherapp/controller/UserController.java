@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import com.acon.weatherapp.model.User;
@@ -45,23 +44,19 @@ public class UserController {
 
 	// 회원가입 처리
 	@PostMapping("/register")
-	public ResponseEntity<?> userRegister(@Valid User user, Errors errors, Model model) {
+	@ResponseBody
+	public ResponseEntity<?> userRegister(@RequestBody @Valid User user, Errors errors) {
 		if (errors.hasErrors()) {
 			// 에러 필드와 메시지를 함께 전송
-			Map<String, String> errorDetails = new HashMap<>();
-			for (FieldError error : errors.getFieldErrors()) {
-				errorDetails.put(error.getField(), error.getDefaultMessage());
-			}
-			return ResponseEntity.badRequest().body(errorDetails);
+			return ResponseEntity.badRequest().body(errors.getFieldErrors());
 		}
 		try{
-			Map<String,String> response = new HashMap<>();
 			userService.registerUser(user);
-			response.put("status" , "success");
-			return ResponseEntity.ok().body(response);
+			return ResponseEntity.ok("success");
 		}catch (IllegalArgumentException | NoSuchElementException e){
 			return ResponseEntity.badRequest().body(e.getMessage());
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.badRequest().body(e.getMessage());
 		}
 	}

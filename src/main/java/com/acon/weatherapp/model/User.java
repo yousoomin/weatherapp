@@ -17,19 +17,19 @@ public class User {
     private String password;
 	@NotBlank(message = "비밀번호 : 비밀번호가 일치하지 않습니다.")
     private String confirmPassword;
-    @Email(message = "이메일 형식을 올바르게 입력해주세요.") // 이메일 형식 검사 어노테이션 , 엄격하지 않음  , @ 앞 도메인 확인 , @ 확인 , @ 뒤 도메인 확인
-    @Nullable // 이메일은 선택적 빈값도 허용 // 값이 있다면 유효성 검사 진행
+    @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" , message = "이메일 형식을 올바르게 입력해주세요.") // 이메일 형식 검사 어노테이션 , 엄격하지 않음  , @ 앞 도메인 확인 , @ 확인 , @ 뒤 도메인 확인
+    @NotBlank(message = "이메일은 필수 값입니다.")
     private String email;
     @NotBlank(message = "이름 : 이름은 한글 2~5자여야 합니다.")
     private String name;
     @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", message = "생년월일 : 생년월일을 올바르게 입력해주세요")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private String birth;
-    @NotBlank(message = "성별 : 성별을 입력하세요")
+    @NotBlank(message = "성별 : 성별을 선택해주세요")
     private String gender;
-	@NotBlank(message = "주소 : 주소를 입력하세요")
+    @Pattern(regexp = "^[가-힣0-9\\s\\-]+$" , message = "주소 : 주소를 검색해주세요")
     private String address;
-	@NotBlank(message = "전화번호 : 전화번호는 필수 입력 항목입니다. 010-1234-5678 형식으로 입력해주세요.")
+	@NotBlank(message = "전화번호 : 전화번호는 필수 입력 항목입니다. ")
     private String phone;
     private String role;
 }

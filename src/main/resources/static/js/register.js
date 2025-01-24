@@ -13,7 +13,7 @@ const validationRules = {
         errorMessage: "비밀번호 : 비밀번호가 일치하지 않습니다.",
     },
     email : {
-        regex : /^([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})?$/,
+        regex : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         errorMessage : "이메일 형식을 올바르게 입력해주세요."
     },
     name: {
@@ -30,8 +30,12 @@ const validationRules = {
     },
     phone: {
         regex: /^01[016789]-\d{3,4}-\d{4}$/, // 전화번호
-        errorMessage: "전화번호는 필수 입력 항목입니다. 010-1234-5678 형식으로 입력해주세요."
+        errorMessage: "전화번호 : 전화번호는 필수 입력 항목입니다. "
     },
+    address : {
+        regex : /^[가-힣0-9\s\-]+$/,
+        errorMessage : "주소 : 주소를 검색해주세요"
+    }
 
 };
 
@@ -56,9 +60,10 @@ function updateErrorMessages(errorState) {
     errorList2.innerHTML = '';
     // 모든 에러 메시지를 순회하면서 표시
     Object.keys(errorState).forEach(errorField => {
-        if (errorField) {
+        if (errorState[errorField]) {
             const li = document.createElement('li');
             li.textContent = errorState[errorField]
+            li.classList.add("errorLi")
             if (errorField === 'userId' || errorField === 'password' || errorField === 'confirmPassword' || errorField === 'email' ){
                 errorList.appendChild(li);
             }else{
@@ -66,12 +71,15 @@ function updateErrorMessages(errorState) {
             }
         }
     });
+    if (Object.values(errorState).every(msg => msg === null)) {
+        errorList.innerHTML = '';
+        errorList2.innerHTML = '';
+    }
 }
 
 const allInput = document.querySelectorAll("input");
 
 allInput.forEach(input => input.addEventListener("blur" , async (e) =>{
-    console.log("Blur event triggered"); // 추가
     e.preventDefault();
     const fieldName = e.target.name
     const fieldValue = e.target.value;
@@ -104,7 +112,7 @@ allInput.forEach(input => input.addEventListener("blur" , async (e) =>{
                     errorState[fieldName] = fieldRule.validateErrorMessage
                 }
             }catch (error){
-                console.log(error)
+                console.error(error)
             }
         }
         updateErrorMessages(errorState)
@@ -118,41 +126,36 @@ allInput.forEach(input => input.addEventListener("blur" , async (e) =>{
 }))
 
 
-document.querySelector("#registerForm").addEventListener("submit" , (e)=>{
+document.querySelector("#registerForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    const form = e.target
-    const formData = new FormData(form)
+    const form = e.target;
+    const formData = new FormData(form);
 
-
-    fetch("/user/register" , {
-        method : "POST",
-        body : formData
-    })
-        .then(res =>{
-            if(!res.ok){
-                return res.json()
-                    .then(errorDetails =>{
-                        Object.keys(errorDetails).forEach(field =>{
-                            errorState[field] = errorDetails[field]
-                        })
-                        updateErrorMessages(errorState);
-
-                        Object.keys(errorDetails).forEach(field => {
-                            const input = document.querySelector(`input[name="${field}"]`);
-                            if (input) {
-                                input.style.border = '1px solid red';
-                            }
-                        });
-                    });
+    try {
+        const response = await fetch("/user/register", {
+            method: "POST",
+            body: JSON.stringify(Object.fromEntries(formData)),
+            headers : {
+                'Content-Type' : 'application/json'
             }
-            return res.json();
-        })
-        .then(result => {
-            if(result && result.status === 'success'){
-                console.log('회원가입 성공')
-            }
-        }).catch(error =>{
-            console.error("Error:" , error)
-    })
-})
+        });
 
+        if (!response.ok) {
+            const errorDetails = await response.json();
+            errorDetails.forEach(errorObject => {
+                errorState[errorObject.field] = errorObject.defaultMessage;
+            })
+            updateErrorMessages(errorState);
+            return;
+        }
+
+        const result = await response.text()
+        console.log(result)
+        if (result === "success") {
+            alert("회원 가입을 축하합니다 ( 로그인 페이지로 이동합니다 )")
+            window.location.href = "/user/login";
+        }
+    } catch (error) {
+        console.error("Error:", error);
+    }
+});

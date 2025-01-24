@@ -25,7 +25,7 @@
 				</div>
 
 				<div>
-					<input type="text" id="email" name="email" class="input-error" placeholder="(선택) 이메일주소 (비밀번호 찾기 등 본인 확인용) " th:value="${user != null ? user.email : ''}">
+					<input type="text" id="email" name="email" class="input-error" placeholder="example@domain.com (비밀번호 찾기 등 본인 확인용) " th:value="${user != null ? user.email : ''}">
 				</div>
 				<div>
 					<ul id="errorList" class="errorList" >
@@ -55,11 +55,11 @@
 
 				<div>
 					<input type="text" id="address" name="address" placeholder="주소" th:value="${user != null ? user.address : ''}">
-					<button class="inline-button">주소 찾기</button>
+					<button class="inline-button" type="button">주소 찾기</button>
 				</div>
 				<div>
-					<input type="tel" id="phone" name="phone" class="input-error" placeholder="ex ) 010-1234-5678" th:value="${user != null ? user.phone : ''}">
-					<button class="inline-button">인증 요청</button>
+					<input type="tel" id="phone" name="phone" class="input-error" placeholder="010-1234-5678" th:value="${user != null ? user.phone : ''}">
+					<button class="inline-button" type="button" >인증 요청</button>
 				</div>
 				<div>
 					<ul id="errorList2" class="errorList" >
