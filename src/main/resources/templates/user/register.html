@@ -59,7 +59,7 @@
 				</div>
 
 				<div>
-					<input type="text" id="address" name="address" placeholder="주소" th:value="${user != null ? user.address : ''}">
+					<input type="text" id="address" name="address" placeholder="주소" th:value="${user != null ? user.address : ''}" readonly required>
 					<button class="inline-button" onClick="addrFind(event)">주소 찾기</button>
 					<span th:if="${address}" th:text="${address}" style="color: red"></span><br>
 				</div>

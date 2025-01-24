@@ -14,7 +14,7 @@ const validationRules = {
     },
     email : {
         regex : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-        errorMessage : "이메일 형식을 올바르게 입력해주세요."
+        errorMessage : "이메일 : 이메일 형식을 올바르게 입력해주세요.",
     },
     name: {
         regex: /^[가-힣]{2,5}$/, // 이름: 한글 2~5자
@@ -33,7 +33,7 @@ const validationRules = {
         errorMessage: "휴대폰 : 휴대폰 번호를 다시 확인해주세요. "
     },
     address : {
-        regex : /^[가-힣0-9\s\-]+$/,
+        required: true,
         errorMessage : "주소 : 주소를 검색해주세요"
     }
 

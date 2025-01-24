@@ -17,8 +17,8 @@ public class User {
     private String password;
 	@NotBlank(message = "비밀번호 : 비밀번호가 일치하지 않습니다.")
     private String confirmPassword;
-    @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" , message = "이메일 형식을 올바르게 입력해주세요.") // 이메일 형식 검사 어노테이션 , 엄격하지 않음  , @ 앞 도메인 확인 , @ 확인 , @ 뒤 도메인 확인
-    @NotBlank(message = "이메일은 필수 값입니다.")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" , message = "이메일 : 이메일 형식을 올바르게 입력해주세요")
+    @NotBlank(message = "이메일 : 이메일은 필수 값입니다.")
     private String email;
     @NotBlank(message = "이름 : 이름은 한글 2~5자여야 합니다.")
     private String name;
