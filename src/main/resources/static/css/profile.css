@@ -1,0 +1,63 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'JetBrains Mono', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* 수직 정렬 */
+    height: 100vh;
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 450px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: center;
+    margin: 10px 0; /* 상하 여백 추가 */
+    font-size: 16px; /* 폰트 크기 조정 */
+}
+
+a {
+    display: inline-block; /* 인라인 블록으로 설정 */
+    margin: 10px 0; /* 상하 여백 추가 */
+    color: #577A9E; /* 링크 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+    padding: 8px 12px; /* 패딩 추가 */
+    border: 1px solid #577A9E; /* 테두리 추가 */
+    border-radius: 5px; /* 모서리 둥글게 */
+    transition: background-color 0.3s, color 0.3s; /* 호버 효과를 위한 전환 */
+}
+
+a:hover {
+    background-color: #577A9E; /* 호버 시 배경색 변경 */
+    color: white; /* 호버 시 텍스트 색상 변경 */
+}
+
+.message {
+    color: green; /* 메시지 색상 */
+    text-align: center; /* 중앙 정렬 */
+}
+
+.error {
+    color: red; /* 오류 메시지 색상 */
+    text-align: center; /* 중앙 정렬 */
+}

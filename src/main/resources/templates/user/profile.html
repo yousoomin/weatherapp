@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <link rel="stylesheet" href="/css/profile.css"> <!-- CSS 파일 링크 -->
 </head>
 <body>
+<div class="profile-container">
     <h2>사용자 프로필</h2>
     <p>아이디: <span th:text="${user.userId}"></span></p>
     <p>이름: <span th:text="${user.name}"></span></p>
@@ -12,17 +14,20 @@
     <p>성별: <span th:text="${user.gender}"></span></p>
     <p>주소: <span th:text="${user.address}"></span></p>
 
-	<a href="/user/update">수정하기</a>
-	<a href="/user/delete">회원 탈퇴</a>
-	
-	<!-- 메시지 표시 -->
-    <div th:if="${message}">
-        <p th:text="${message}" style="color:green;"></p>
+    <div style="text-align: center;">
+        <a href="/user/update">수정하기</a>
+        <a href="/user/delete">회원 탈퇴</a>
+    </div>
+
+    <!-- 메시지 표시 -->
+    <div th:if="${message}" class="message">
+        <p th:text="${message}"></p>
     </div>
 
     <!-- 오류 메시지 표시 -->
-    <div th:if="${error}">
-        <p th:text="${error}" style="color:red;"></p>
+    <div th:if="${error}" class="error">
+        <p th:text="${error}"></p>
     </div>
+</div>
 </body>
 </html>

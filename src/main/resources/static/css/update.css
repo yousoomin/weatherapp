@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'JetBrains Mono', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* 수직 정렬 */
+    height: 100vh;
+}
+
+.update-container {
+    width: 100%;
+    max-width: 450px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: left; /* 왼쪽 정렬 */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold; /* 레이블 굵게 */
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px; /* 아래 여백 추가 */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input:focus {
+    border: 1px solid #2669B0; /* 포커스 시 테두리 색상 */
+    outline: none; /* 기본 아웃라인 제거 */
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #577A9E;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4676A9; /* 호버 시 배경색 변경 */
+}
+
+a {
+    display: block; /* 블록으로 설정하여 아래로 정렬 */
+    margin-top: 10px; /* 상단 여백 추가 */
+    text-align: center; /* 중앙 정렬 */
+    color: #577A9E; /* 링크 색상 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+a:hover {
+    text-decoration: underline; /* 호버 시 밑줄 추가 */
+}
+
+.error {
+    color: red; /* 오류 메시지 색상 */
+    text-align: center; /* 중앙 정렬 */
+    margin-top: 10px; /* 위 여백 추가 */
+}
