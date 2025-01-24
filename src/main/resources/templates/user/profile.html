@@ -7,7 +7,13 @@
 </head>
 <body>
 <div class="profile-container">
-    <h2>사용자 프로필</h2>
+    <div>
+        <a href="/" >
+            <img src="/image/uipng/homeIcon.png" class="homeIcon" alt="뒤로가기" width="25" height="25"> <!-- 화살표 이미지 -->
+        </a>
+        <h2>사용자 프로필</h2>
+    </div>
+
     <p>아이디: <span th:text="${user.userId}"></span></p>
     <p>이름: <span th:text="${user.name}"></span></p>
     <p>생년월일: <span th:text="${user.birth}"></span></p>
@@ -15,8 +21,8 @@
     <p>주소: <span th:text="${user.address}"></span></p>
 
     <div style="text-align: center;">
-        <a href="/user/update">수정하기</a>
-        <a href="/user/delete">회원 탈퇴</a>
+        <a href="/user/update" class="profileBtn" >수정하기</a>
+        <a href="/user/delete" class="profileBtn" >회원 탈퇴</a>
     </div>
 
     <!-- 메시지 표시 -->

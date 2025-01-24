@@ -36,7 +36,7 @@ p {
     font-size: 16px; /* 폰트 크기 조정 */
 }
 
-a {
+.profileBtn {
     display: inline-block; /* 인라인 블록으로 설정 */
     margin: 10px 0; /* 상하 여백 추가 */
     color: #577A9E; /* 링크 색상 */
@@ -47,7 +47,7 @@ a {
     transition: background-color 0.3s, color 0.3s; /* 호버 효과를 위한 전환 */
 }
 
-a:hover {
+.profileBtn:hover {
     background-color: #577A9E; /* 호버 시 배경색 변경 */
     color: white; /* 호버 시 텍스트 색상 변경 */
 }
@@ -60,4 +60,8 @@ a:hover {
 .error {
     color: red; /* 오류 메시지 색상 */
     text-align: center; /* 중앙 정렬 */
+}
+.homeIcon:hover{
+    scale: 1.2;
+    transition: 0.3s;
 }
