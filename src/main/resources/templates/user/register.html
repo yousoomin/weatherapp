@@ -10,7 +10,12 @@
 
 <body>
 	<div class="register-container" >
-			<h2>회원가입</h2>
+			<div>
+				<a href="/" >
+					<img src="/image/uipng/homeIcon.png" alt="뒤로가기" width="25" height="25"> <!-- 화살표 이미지 -->
+				</a>
+				<h2>회원가입</h2>
+			</div>
 			<form action="/user/register" method="post" id="registerForm">
 				<div>
 					<input type="text" id="userId" class="input-error" name="userId" placeholder="아이디를 입력해주세요" th:value="${user != null ? user.userId : ''}">
