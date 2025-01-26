@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
+
 @Data
 public class User {
 	@Pattern(regexp = "^[a-zA-Z][a-zA-Z0-9]{5,20}$", message = "아이디 : 영문, 숫자로 5~20자여야 합니다.")
@@ -32,6 +34,8 @@ public class User {
 	@NotBlank(message = "전화번호 : 전화번호는 필수 입력 항목입니다. ")
     private String phone;
     private String role;
+    private String resetPasswordToken; // 비밀번호 재설정 토큰
+    private Date resetPasswordExpires;
 }
 
 /*
