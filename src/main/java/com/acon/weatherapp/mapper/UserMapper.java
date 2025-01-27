@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.*;
 
 import com.acon.weatherapp.model.User;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +15,7 @@ public interface UserMapper {
 
 //회원가입
   @Insert("INSERT INTO users (userid, name, birth, password, gender, address, phone, role, email) " +
-           "VALUES (#{userId}, #{name}, #{birth}, #{password}, #{gender}, #{address}, #{phone}, #{role}, #{email})")
+           "VALUES ON DUPLICATE KEY UPDATE  (#{userId}, #{name}, #{birth}, #{password}, #{gender}, #{address}, #{phone}, #{role}, #{email})")
    void save(User user);
    //id로 해당 유저 있는지 찾기
    @Select("SELECT * FROM users WHERE userid = #{userId}")
@@ -31,6 +32,9 @@ public interface UserMapper {
 
    @Select("SELECT * FROM users WHERE email = #{email}")
    Optional<User> findByEmail(String email);
+
+ @Update("UPDATE users SET resetPasswordToken = #{resetPasswordToken}, resetPasswordExpires = #{resetPasswordExpires} WHERE userid = #{userId}")
+   void updatePasswordTokenAndExpired(String resetPasswordToken , Date resetPasswordExpires , String userId);
 
    @Select("SELECT * FROM users WHERE resetPasswordToken = #{token}")
    Optional<User> findByResetPasswordToken(String token);
