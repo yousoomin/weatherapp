@@ -3,7 +3,7 @@ const findPassBtn = document.querySelector(".findPassBtn")
 findPassBtn.addEventListener("click" , async (e) =>{
     e.preventDefault();
     const emailValue = document.querySelector("#email").value.trim();
-    const response = await fetch("/api/password/request" , {
+    const response = await fetch("/api/password/reset" , {
         method : 'POST',
         headers : {
             'Content-Type' : 'application/json'
@@ -11,5 +11,10 @@ findPassBtn.addEventListener("click" , async (e) =>{
         body : JSON.stringify({ email : emailValue })
     })
 
-    console.log(response)
+
+    if(response.ok){
+        const message =  document.querySelector(".reset-message")
+        const data = await response.text();
+        message.textContent = data;
+    }
 })

@@ -26,6 +26,9 @@ public interface UserMapper {
    // 수정
    @Update("UPDATE users SET name= #{name} , phone = #{phone}, address= #{address} WHERE userid = #{userId}")
    void update(User user);
+   // 비밀번호 수정
+    @Update("UPDATE users SET password = #{password} WHERE resetPasswordToken = #{resetPasswordToken} ")
+    void updatePassword(String password , String resetPasswordToken);
    // 삭제
    @Delete("DELETE FROM users WHERE userid = #{userId}")
    void delete(String userId);
@@ -33,9 +36,11 @@ public interface UserMapper {
    @Select("SELECT * FROM users WHERE email = #{email}")
    Optional<User> findByEmail(String email);
 
- @Update("UPDATE users SET resetPasswordToken = #{resetPasswordToken}, resetPasswordExpires = #{resetPasswordExpires} WHERE userid = #{userId}")
+   @Select("SELECT * FROM users WHERE resetPasswordToken = #{token}")
+    Optional<User> findByResetPasswordToken(String token);
+
+   @Update("UPDATE users SET resetPasswordToken = #{resetPasswordToken}, resetPasswordExpires = #{resetPasswordExpires} WHERE userid = #{userId}")
    void updatePasswordTokenAndExpired(String resetPasswordToken , Date resetPasswordExpires , String userId);
 
-   @Select("SELECT * FROM users WHERE resetPasswordToken = #{token}")
-   Optional<User> findByResetPasswordToken(String token);
+
 }
