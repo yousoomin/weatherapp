@@ -59,4 +59,14 @@ public class PasswordResetController {
             return "user/error";
         }
     }
+
+    @PostMapping("/reset/{token}")
+    public String resetPassword(@PathVariable("token") String token ,@RequestParam String password ,@RequestParam String confirmPassword) throws MessagingException {
+        System.out.println(password);
+        System.out.println(token);
+
+
+        return null;
+    }
+
 }
