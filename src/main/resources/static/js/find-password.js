@@ -1,4 +1,5 @@
 const findPassBtn = document.querySelector(".findPassBtn")
+const resetPassBtn = document.querySelector(".resetPassBtn")
 
 findPassBtn.addEventListener("click" , async (e) =>{
     e.preventDefault();
@@ -11,10 +12,13 @@ findPassBtn.addEventListener("click" , async (e) =>{
         body : JSON.stringify({ email : emailValue })
     })
 
-
+    const message =  document.querySelector(".reset-message")
     if(response.ok){
-        const message =  document.querySelector(".reset-message")
+        const data = await response.text();
+        message.textContent = data;
+    }else{
         const data = await response.text();
         message.textContent = data;
     }
 })
+

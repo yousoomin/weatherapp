@@ -46,6 +46,7 @@ public class UserController {
 	@PostMapping("/register")
 	@ResponseBody
 	public ResponseEntity<?> userRegister(@RequestBody @Valid User user, Errors errors) {
+		System.out.println(user.getUserId());
 		if (errors.hasErrors()) {
 			// 에러 필드와 메시지를 함께 전송
 			return ResponseEntity.badRequest().body(errors.getFieldErrors());
